@@ -1,0 +1,137 @@
+
+================================================================================
+ QUANTITATIVE TRADING STRATEGY BACKTEST
+ Moving Average Crossover | Brock et al. (1992) Methodology
+================================================================================
+
+[1/6] Downloading price data for ['AAPL', 'MSFT', 'JPM', 'XOM', 'JNJ'] ...
+     Downloaded 3522 trading days (2010-01-04 -> 2023-12-29)
+
+[2/6] Computing descriptive statistics ...
+
+================================================================================
+TABLE 1: Descriptive Statistics of Daily Log Returns
+    Sample Period: 2010-01-01 to 2023-12-31
+================================================================================
+          Mean Std Dev Skewness Kurtosis  JB Stat JB p-Val    AC(1)
+Ticker
+AAPL    0.0010  0.0178  -0.2545   5.4454   4373.2   0.0000  -0.0434
+JNJ     0.0004  0.0106  -0.3316   9.7002  13824.7   0.0000  -0.0704
+JPM     0.0005  0.0177  -0.1033   9.4669  13112.6   0.0000  -0.0961
+MSFT    0.0008  0.0163  -0.1864   8.0499   9496.1   0.0000  -0.1075
+XOM     0.0003  0.0160  -0.1605   7.3506   7915.8   0.0000  -0.0242
+Notes: Mean and Std Dev are daily. JB = Jarque-Bera normality test.
+     AC(1) = first-order autocorrelation of daily log returns.
+
+[3/6] Running strategy backtest ...
+    AAPL: Strategy Sharpe =0.815|Trades = 11
+    MSFT: Strategy Sharpe =0.806|Trades = 15
+    JPM: Strategy Sharpe =0.378|Trades = 15
+    XOM: Strategy Sharpe =0.199|Trades = 22
+    JNJ: Strategy Sharpe =0.189|Trades = 20
+
+[4/6] Printing performance tables...
+
+================================================================================
+TABLE 2: Strategy vs. Buy-and-Hold Performance
+    50/200-Day SMA Crossover | Transaction Cost: 0.100000% per trade
+================================================================================
+       Strat Ann Ret B&H Ann Ret Excess Ret Strat Sharpe B&H Sharpe Max DD (Strat) Max DD (B&H) N Trades
+Ticker
+AAPL         +20.38%     +27.47%     -7.10%        0.815      0.932        -45.72%      -43.80%       11
+MSFT         +19.09%     +21.96%     -2.87%        0.806      0.819        -28.04%      -37.15%       15
+JPM           +7.89%     +13.26%     -5.37%        0.378      0.514        -43.63%      -43.63%       15
+XOM           +4.00%      +6.66%     -2.67%        0.199      0.303        -42.46%      -62.40%       22
+JNJ           +3.75%      +9.70%     -5.96%        0.189      0.517        -35.87%      -27.37%       20
+
+Notes: Ann Ret = annualized return. Sharpe ratio uses RF = 2.0% p.a.
+     Max DD = maximum peak-to-through drawdown.
+
+================================================================================
+TABLE 3: Statistical Significance of Daily Excess Returns
+     H0: Mean daily excess return = 0 (Two-tailed t-test)
+================================================================================
+       Mean Excess Std Excess t-Statistic p-Value 95% CI Lower 95% CI Upper Sig. at 5%?
+Ticker
+AAPL       -0.0003     0.0095      -1.696  0.0900      -0.0006       0.0000          No
+MSFT       -0.0001     0.0083      -0.919  0.3579      -0.0004       0.0001          No
+JPM        -0.0003     0.0122      -1.272  0.2036      -0.0007       0.0001          No
+XOM        -0.0002     0.0118      -0.850  0.3954      -0.0006       0.0002          No
+JNJ        -0.0002     0.0051      -2.748  0.0060      -0.0004      -0.0001         Yes
+
+Notes: Excess return = strategy daily return minus buy-and-hold return.
+     ***p<.01, **p.05, *p<.10
+
+================================================================================
+TABLE 4: In-Sample vs. Out-of-Sample Performance
+    In-Sample: 2010-01-01 to 2018-12-31
+    Out-of-Sample: 2018-12-31 to 2023-12-31
+================================================================================
+                     Strat Sharpe B&H Sharpe Strat Ann Ret B&H Ann Ret
+Ticker Period
+AAPL   In-Sample            0.767      0.817       +17.04%     +21.72%
+       Out-of-Sample        0.900      1.112       +26.62%     +38.52%
+MSFT   In-Sample            0.590      0.713       +12.43%     +17.04%
+       Out-of-Sample        1.120      0.982       +32.07%     +31.33%
+JPM    In-Sample            0.421      0.499        +8.26%     +12.19%
+       Out-of-Sample        0.329      0.541        +7.23%     +15.21%
+XOM    In-Sample           -0.165      0.144        -0.95%      +2.97%
+       Out-of-Sample        0.580      0.487       +13.51%     +13.64%
+JNJ    In-Sample            0.463      0.664        +7.34%     +11.34%
+       Out-of-Sample       -0.163      0.332        -2.41%      +6.83%
+
+Notes: Out-of-sample period used for validation only --no parameter re-fitting.
+
+================================================================================
+ Strategy Ann. Return                 0.1204
+ B&H Ann. Return                      0.1727
+ Excess Return (Ann.)                -0.0523
+ Strategy Sharpe                      0.7787
+ B&H Sharpe                           0.8485
+ Strategy Max Drawdown               -0.2579
+ B&H Max Drawdown                    -0.3523
+ Win Rate (Strategy)                  0.5210
+ Number of Trades                          0
+ Mean Daily Excess Ret               -0.0002
+ Std Daily Excess Ret                 0.0059
+ t-Statistic                         -2.1685
+ p-Value                              0.0302
+ 95% CI Lower                        -0.0004
+ 95% CI Upper                        -0.0000
+ Significant (5%)                        Yes
+
+[5/6] Generating charts...
+    Saved: fig1_AAPL_price_and_MA.png
+    Saved: fig1_MSFT_price_and_MA.png
+    Saved: fig1_JPM_price_and_MA.png
+    Saved: fig1_XOM_price_and_MA.png
+    Saved: fig1_JNJ_price_and_MA.png
+    Saved: fig2_equity_curves.png
+    Saved: fig3_portfolio_equity.png
+    Saved: fig4_performance_comparison.png
+    Saved: fig5_robustness_heatmap.png
+
+[6/6]All outputs complete!
+================================================================================
+
+ CHARTS SAVED:
+    fig1_AAPL_price_and_MA.png -> Paper: Figure 1 (results 5.2
+    fig1_MSFT_price_and_MA.png -> Paper: Figure 1 (results 5.2
+    fig1_JPM_price_and_MA.png -> Paper: Figure 1 (results 5.2
+    fig1_XOM_price_and_MA.png -> Paper: Figure 1 (results 5.2
+    fig1_JNJ_price_and_MA.png -> Paper: Figure 1 (results 5.2
+ fig2_equity_curves.png      -> Paper: Figure 2 (results 5.2)
+ fig3_portfolio_equity.png      -> Paper: Figure 3 (results 5.3)
+ fig4_performance_comparison.png -> Paper: Figure 4 (results 5.2)
+ fig5_robustness_heatmap.png      -> Paper: Figure 5 (results 5.6)
+
+ TABLES PRINTED ABOVE:
+ table 1 -> Paper: descriptive Statistics (5.1)
+ table 2 -> Paper: Strategy vs B&H        (5.2)
+ table 3 -> Paper: Statistical Significance (5.4)
+ table 4 -> Paper: In/Out-of-Sample Split (5.5)
+
+ Copy terminal output into my paper's Empirical Results section.
+================================================================================
+
+Press any key to continue . . .
