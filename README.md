@@ -1,4 +1,4 @@
-# Backtesting and Analysis of a Quantitative Trading Strategy: - - - - - - A Case Study in Moving Average Crossovers and Portfolio Diversification
+# Backtesting and Analysis of a Quantitative Trading Strategy: <br/> A Case Study in Moving Average Crossovers and Portfolio Diversification
 
 The paper examines the profitability and statistical strength of a 50/200-day simple moving average crossover strategy as compared to a passive buy-and-hold control on a diversified portfolio of large-cap equities. 
 
